@@ -5,21 +5,27 @@
       chatForm = document.querySelector('form'),
       nameInput = document.querySelector('.nickname'),
       nickName = null,
+      colour,
       chatMessage = chatForm.querySelector('.message'),
-      colour = null,
-      joinbutton = document.querySelector('#join');
+      joinbutton = document.querySelector('#join'),
+      images = ["icon.png","icon2.png","icon3.png","icon4.png","icon5.png","icon6.png"];
+
+   var user = new Object();
 
   function setNickname() {
     nickName = nameInput.value;
     colour = "#000000".replace(/0/g,function(){return (~~(Math.random()*16)).toString(16);});
-    appendUser(nickName,colour);
+    user.name = nickName;
+    user.colour = colour;
+    user.image = images[Math.floor(Math.random() * images.length)];
+    appendUser(nickName);
     nameInput.value = '';
   }
 
   function handleSendMessage(e) {
     e.preventDefault();
     nickName = (nickName && nickName.length > 0) ? nickName : 'user';
-    msg = `( ${nickName} ) ${chatMessage.value}`;
+    msg = ` <li style="color:${user.colour};"> <img src="images/${user.image}" alt="Chat Icon" class="images"> ( ${nickName} ) ${chatMessage.value} </li>`;
 
     socket.emit('chat message', msg);
     chatMessage.value = '';
@@ -28,23 +34,22 @@
 
   function appendMessage(msg) {
     //debugger;
-    let newMsg = `<li>${msg.message}</li>`
+    let newMsg = `${msg.message}`
     messageList.innerHTML += newMsg;
   }
 
-  function appendDMessage(msg) {
-    let newMsg = `<li>${nickName} has left the conversation</li>`
+  function appendDMessage() {
+    let newMsg = `<li>${socket.id} has left the conversation</li>`
     messageList.innerHTML += newMsg;
   }
 
-  function appendUser(nickName,colour){
+  function appendUser(nickName){
     nickname = `${nickName}`;
-    colour = `${colour}`;
     msg = `${nickName} has joined the conversation`
     socket.emit('chat message', msg);
-    socket.emit('set nickname', nickname);
-    socket.emit('set colour', colour);
   }
+
+
 
   joinbutton.addEventListener('click', setNickname, false);
   chatForm.addEventListener('submit', handleSendMessage, false);

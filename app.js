@@ -4,9 +4,6 @@ const io = require('socket.io')();
 
 const PORT = process.env.port || 3000;
 
-var usernames = [];
-var colours = [];
-
 app.use(express.static('public'));
 
 app.use(require('./routes/index'));
@@ -27,15 +24,6 @@ io.on('connection', function(socket) {
     io.emit('chat message', {for: 'everyone', message: msg });
   });
 
-  socket.on('set nickname', function(nickName){
-    usernames.push(nickName);
-    console.log(usernames);
-  });
-
-  socket.on('set colour', function(colour){
-    colours.push(colour);
-    console.log(colours);
-  });
 
 
   socket.on('disconnect', function() {
