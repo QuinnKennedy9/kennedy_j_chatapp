@@ -8,12 +8,16 @@
   <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-  <input type="text" class="nickname" placeholder="What is your nickname?">
 	<ul id="messages"></ul>
-	<form>
-		<input class="message" type="text" id="m" autocomplete="off">
-		<button>send</button>
-	</form>
+  <div id="container">
+    <h2 id="welcome">Welcome to the chat app</h2>
+    <input type="text" class="nickname" placeholder="What is your nickname?" id="nicknameEntry">
+    <button id="join">Join Chat</button>
+    <form>
+      <input class="message" type="text" id="m" placeholder="Enter your message here"autocomplete="off">
+      <button>send</button>
+    </form>
+  </div>
 	<script src="/socket.io/socket.io.js"></script>
 	<script src="js/main.min.js"></script>
 </body>
