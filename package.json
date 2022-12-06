@@ -17,13 +17,13 @@
   "author": "Jon Kennedy",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.16.2",
+    "express": "^4.18.2",
     "grunt": "^1.0.0",
     "grunt-contrib-sass": "^1.0.0",
     "socket.io": "^2.0.4"
   },
   "devDependencies": {
     "grunt-contrib-uglify-es": "git://github.com/gruntjs/grunt-contrib-uglify.git#harmony",
-    "grunt-contrib-watch": "^1.0.0"
+    "grunt-contrib-watch": "^1.1.0"
   }
 }
